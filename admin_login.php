@@ -52,11 +52,11 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RCGI | LOGIN</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="icon" href="pics\rcgiph_logo.jpg" type="logo">
+    <link rel="icon" href="pics\rcgiph_logo.png" type="logo">
     <style>
         body {
             /* Admin Login */
-            font-family: 'Inter';
+            font-family: 'Inter', sans-serif;
             font-weight: bold;
             font-weight: 600;
             font-size: 15px;
@@ -150,7 +150,7 @@ $conn->close();
             margin-left: auto;
             margin-right: auto;
             margin-bottom: -20px;
-            width: 25%;
+            width: 30%;
         }
     </style>
 </head>
@@ -159,7 +159,7 @@ $conn->close();
     <div class="containerlogin" style="opacity: 80%;">
         <div class="login-form">
             <form action="" method="POST">
-                <img src="pics\rcgiph_logo.jpg" alt="logo" />
+                <img src="pics\rcgiph_logo.png" alt="logo" />
                 <h1>Admin Login</h1>
                 <label for="username">Username</label>
                 <input type="text" placeholder="Enter username" name="username" required />
