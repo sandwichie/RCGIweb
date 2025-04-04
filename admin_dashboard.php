@@ -30,7 +30,7 @@ $conn->close();
   <title>RCGI | DASHBOARD</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <link rel="icon" href="pics/rcgiph_logo.jpg" type="image/jpg" />
+  <link rel="icon" href="pics/rcgiph_logo.png" type="image/jpg" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -252,7 +252,7 @@ $conn->close();
     </div>
 
     <div class="w-100 text-center pb-3">
-      <img src="pics/rcgiph_logo.jpg" class="img-fluid" alt="Logo" style="max-width: 50%; height: auto;">
+      <img src="pics/rcgiph_logo.png" class="img-fluid" alt="Logo" style="max-width: 50%; height: auto;">
     </div>
   </div>
 
