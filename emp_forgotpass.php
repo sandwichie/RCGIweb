@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])) {
 
       <button type="submit" name="submit"  class="submit-btn">Submit</button>
     </form>
-    <a href="emp_login.php" class="back-link">Back to Log in</a>
+    <a href="rcgi_index.php" class="back-link">Back to Log in</a>
   </div>
 </body>
 
