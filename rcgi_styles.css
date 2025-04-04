@@ -11266,11 +11266,10 @@ section#contact .section-heading {
 section#contact form#contactForm .form-group {
   margin-bottom: 1.5rem;
   text-align: center;
-
 }
 section#contact form#contactForm .form-group input,
 section#contact form#contactForm .form-group textarea {
-  padding: 1.5rem;
+  padding: 2rem;
 }
 section#contact form#contactForm .form-group input.form-control {
   height: auto;
@@ -11301,6 +11300,10 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   color: #ced4da;
+}
+
+.forgot-password {
+  margin-top: 20px ;
 }
 
 .footer {
