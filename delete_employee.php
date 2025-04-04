@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $employee_id); 
     if ($stmt->execute()) {
-        header("Location: manage-employee.php");
+        header("Location: admin_manage-employee.php");
         exit;
     } else {
         echo "Error deleting employee: " . $conn->error;
