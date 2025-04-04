@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD']  == "POST" && isset($_POST['submit'])) {
   $endshift = $_POST['shift_end_time'];
   $hiredate = $_POST['hire_date'];
   $org = $_POST['org'];
+  $password = 'AdminPass';
 
   // Check if an image is uploaded
   $employee_image = null;
@@ -58,13 +59,19 @@ if ($_SERVER['REQUEST_METHOD']  == "POST" && isset($_POST['submit'])) {
   $conn->begin_transaction();
   try {
     // Updated SQL to include admin_ID
-    $stmt = $conn->prepare("INSERT INTO employee (admin_ID, employee_id, name, fingerprint_id, photo, hire_date, shift_start_time, shift_end_time, org) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("iisisssss", $admin_id, $employee_id, $name, $fingerprint_id, $employee_image, $hiredate, $startshift, $endshift, $org);
+    $stmt = $conn->prepare("INSERT INTO employee (admin_ID, employee_id, name, fingerprint_id, photo, hire_date, shift_start_time, shift_end_time, org, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    // Corrected bind_param to match the number of placeholders
+    $stmt->bind_param("isssssssss", $admin_id, $employee_id, $name, $fingerprint_id, $employee_image, $hiredate, $startshift, $endshift, $org, $password);
+    
+    // Execute the query
     $stmt->execute();
 
+    // Commit transaction
     $conn->commit();
     echo "<script>alert('Employee added successfully.');</script>";
   } catch (Exception $e) {
+    // Rollback transaction in case of error
     $conn->rollback();
     error_log($e->getMessage());
     echo "<script>alert('Error adding employee. Please try again.');</script>";
@@ -85,7 +92,7 @@ $conn->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RCGI | Manage Employees</title>
-  <link rel="icon" href="pics/rcgiph_logo.jpg" type="image/x-icon">
+  <link rel="icon" href="pics/rcgiph_logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 
@@ -417,7 +424,7 @@ $conn->close();
           </a>
         </div>
         <div class="w-100 text-center pb-3">
-          <img src="pics/rcgiph_logo.jpg" class="img-fluid" alt="Logo" style="max-width: 50%; height: auto;">
+          <img src="pics/rcgiph_logo.png" class="img-fluid" alt="Logo" style="max-width: 50%; height: auto;">
         </div>
       </div>
 
@@ -477,18 +484,18 @@ $conn->close();
                       <!-- Left Column -->
                       <div class="col-left">
                         <div class="image-upload">
-                          <label style="margin-top: 50px; margin-bottom: 15px;">Insert Profile Picture</label>
+                          <label style="margin-top: 10px; margin-bottom: 15px;">Insert Profile Picture</label>
                           <img src="pics/placeholder.jpg" class="img-thumbnail" alt="Profile Image" id="employee_image">
                           <input type="file" class="form-control" name="employee_image" style="width: 70%;" id="imageUpload" accept="image/*" required>
+                          <div class="form-group">
+                            <label>Employee ID</label>
+                            <input type="text" style="width: 50%;" name="employee_ID" placeholder="Enter employee ID" required>
+                          </div>
                         </div>
                       </div>
 
                       <!-- Right Column -->
                       <div class="col-right">
-                        <div class="form-group">
-                          <label>Employee ID</label>
-                          <input type="text" name="employee_ID" placeholder="Enter employee ID" required>
-                        </div>
                         <div class="form-group">
                           <label>Name</label>
                           <input type="text" name="name" placeholder="Enter name" required>
@@ -524,9 +531,13 @@ $conn->close();
                             <option>Terraco</option>
                           </select>
                         </div>
+                        <div class="form-group">
+                          <label>Default Password</label>
+                          <input type="text" name="password" value="AdminPass" readonly>
+                        </div>
                         <div class="modal-footer">
                           <button type="submit" name="submit" class="btn btn-primary">Add Employee</button>
-                          <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                          <a href="admin_manage-employee.php"><button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button></a>
                         </div>
                       </div>
                     </div>
@@ -591,6 +602,7 @@ $conn->close();
   </div> <!-- End Container -->
 
   <script>
+    
     document.getElementById("openModalBtn").addEventListener("click", function() {
       document.getElementById("employeeModal").style.display = "block";
     });
@@ -602,7 +614,7 @@ $conn->close();
     document.getElementById("cancelBtn").addEventListener("click", function() {
       document.getElementById("employeeModal").style.display = "none";
     });
-
+    
     // Close modal if user clicks outside content box
     window.onclick = function(event) {
       var modal = document.getElementById("employeeModal");
