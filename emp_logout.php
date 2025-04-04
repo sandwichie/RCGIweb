@@ -2,6 +2,6 @@
 session_start();
 session_unset(); // Remove all session variables
 session_destroy(); // Destroy the session
-header("Location: emp_login.php"); // Redirect to the login page
+header("Location: rcgi_index.php"); // Redirect to the login page
 exit;
 ?>
